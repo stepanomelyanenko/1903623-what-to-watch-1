@@ -1,8 +1,14 @@
-import MainScreen from "../../pages/main-screen/main-screen";
+import MainScreen from '../../pages/main-screen/main-screen';
 
-function App(): JSX.Element {
+type headFilm = {
+  title: string,
+  genre: string,
+  year: number
+}
+
+function App(HeadFilmProps: headFilm): JSX.Element {
   return (
-    <MainScreen/>
+    <MainScreen headFilm = {HeadFilmProps}/>
   );
 }
 
