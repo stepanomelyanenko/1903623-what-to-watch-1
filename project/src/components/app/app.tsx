@@ -1,4 +1,11 @@
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {AppRoute} from '../../const';
 import MainScreen from '../../pages/main-screen/main-screen';
+import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
+import MyListScreen from '../../pages/my-list-screen/my-list-screen';
+import FilmScreen from '../../pages/film-screen/film-screen';
+import PlayerScreen from '../../pages/player-screen/player-screen';
+//import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 
 type headFilm = {
   title: string,
@@ -8,7 +15,52 @@ type headFilm = {
 
 function App(HeadFilmProps: headFilm): JSX.Element {
   return (
-    <MainScreen headFilm = {HeadFilmProps}/>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppRoute.Root}
+          element={<MainScreen headFilm = {HeadFilmProps} />}
+        />
+        <Route
+          path={AppRoute.SignIn}
+          element={<SignInScreen />}
+        />
+        <Route
+          path={AppRoute.MyList}
+          element={<MyListScreen />}
+        />
+
+        <Route path={AppRoute.Player}>
+          <Route
+            path={':id'}
+            element={<PlayerScreen />}
+          />
+        </Route>
+
+        <Route path={AppRoute.Film}>
+          <Route
+            path={':id'}
+            element={<FilmScreen />}
+          >
+            {/*<Route*/}
+            {/*  path={AppRoute.AddReview}*/}
+            {/*  element={<AddReviewScreen />}*/}
+            {/*/>*/}
+          </Route>
+        </Route>
+
+        <Route
+          path={'*'}
+          element={
+            <h1>
+              404.
+              <br />
+              <small>Page not found</small>
+            </h1>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
