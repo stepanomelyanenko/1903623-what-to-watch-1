@@ -5,6 +5,7 @@ import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 //import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 
 type headFilm = {
@@ -51,13 +52,7 @@ function App(HeadFilmProps: headFilm): JSX.Element {
 
         <Route
           path={'*'}
-          element={
-            <h1>
-              404.
-              <br />
-              <small>Page not found</small>
-            </h1>
-          }
+          element={<NotFoundScreen />}
         />
       </Routes>
     </BrowserRouter>

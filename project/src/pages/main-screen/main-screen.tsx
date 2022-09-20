@@ -12,7 +12,7 @@ type MainScreenProps = {
 function MainScreen(props: MainScreenProps): JSX.Element {
   return (
     <>
-      <InjectedSVGComponent isContainPlaySymbol={true} />
+      <InjectedSVGComponent isContainPlaySymbol />
 
       <section className="film-card">
         <div className="film-card__bg">

@@ -3,7 +3,7 @@ import InjectedSVGComponent from '../../components/injected-svg-component/inject
 function FilmScreen(): JSX.Element {
   return (
     <>
-      <InjectedSVGComponent isContainPlaySymbol={true} />
+      <InjectedSVGComponent isContainPlaySymbol />
 
       <section className="film-card film-card--full">
         <div className="film-card__hero">
