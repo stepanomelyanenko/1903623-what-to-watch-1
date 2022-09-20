@@ -2,7 +2,7 @@ type InjectedSVGProps = {
   isContainPlaySymbol: boolean;
 }
 
-function InjectedSVGComponent({isContainPlaySymbol}: InjectedSVGProps): JSX.Element {
+function InjectedSvg({isContainPlaySymbol}: InjectedSVGProps): JSX.Element {
   return (
     <div className="visually-hidden">
       { /* inject:svg */ }
@@ -48,4 +48,4 @@ function PlaySymbolComponent(): JSX.Element {
   );
 }
 
-export default InjectedSVGComponent;
+export default InjectedSvg;

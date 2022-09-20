@@ -1,5 +1,6 @@
-import FilmCard from '../../components/film-card-component/film-card-component';
-import InjectedSVGComponent from '../../components/injected-svg-component/injected-svg-component';
+import FilmCard from '../../components/film-card/film-card';
+import InjectedSvg from '../../components/injected-svg/injected-svg';
+import Logo from '../../components/logo/logo';
 
 type MainScreenProps = {
   headFilm: {
@@ -12,7 +13,7 @@ type MainScreenProps = {
 function MainScreen(props: MainScreenProps): JSX.Element {
   return (
     <>
-      <InjectedSVGComponent isContainPlaySymbol />
+      <InjectedSvg isContainPlaySymbol />
 
       <section className="film-card">
         <div className="film-card__bg">
@@ -22,13 +23,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo isLightVersion={false}/>
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -141,14 +136,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
+          <Logo isLightVersion />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>

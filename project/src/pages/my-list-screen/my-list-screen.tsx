@@ -1,9 +1,9 @@
-import InjectedSVGComponent from '../../components/injected-svg-component/injected-svg-component';
+import InjectedSvg from '../../components/injected-svg/injected-svg';
 
 function MyListScreen(): JSX.Element {
   return (
     <>
-      <InjectedSVGComponent isContainPlaySymbol={false} />
+      <InjectedSvg isContainPlaySymbol={false} />
 
       <div className="user-page">
         <header className="page-header user-page__head">
