@@ -4,8 +4,6 @@ import Logo from '../../components/logo/logo';
 function FilmScreen(): JSX.Element {
   return (
     <>
-      <InjectedSvg isContainPlaySymbol />
-
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">

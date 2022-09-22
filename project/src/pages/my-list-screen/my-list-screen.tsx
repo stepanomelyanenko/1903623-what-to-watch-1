@@ -3,8 +3,6 @@ import InjectedSvg from '../../components/injected-svg/injected-svg';
 function MyListScreen(): JSX.Element {
   return (
     <>
-      <InjectedSvg isContainPlaySymbol={false} />
-
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">

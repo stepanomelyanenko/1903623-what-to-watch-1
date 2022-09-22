@@ -4,8 +4,6 @@ import Logo from '../../components/logo/logo';
 function AddReviewScreen(): JSX.Element {
   return (
     <>
-      <InjectedSvg isContainPlaySymbol={false} />
-
       <section className="film-card film-card--full">
         <div className="film-card__header">
           <div className="film-card__bg">

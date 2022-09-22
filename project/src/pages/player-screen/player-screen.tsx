@@ -3,8 +3,6 @@ import InjectedSvg from '../../components/injected-svg/injected-svg';
 function PlayerScreen(): JSX.Element {
   return (
     <>
-      <InjectedSvg isContainPlaySymbol={false} />
-
       <div className="player">
         <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 

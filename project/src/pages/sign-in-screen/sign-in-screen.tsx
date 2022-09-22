@@ -4,8 +4,6 @@ import Logo from '../../components/logo/logo';
 function SignInScreen(): JSX.Element {
   return (
     <>
-      <InjectedSvg isContainPlaySymbol={false} />
-
       <div className="user-page">
         <header className="page-header user-page__head">
           <Logo isLightVersion={false}/>
