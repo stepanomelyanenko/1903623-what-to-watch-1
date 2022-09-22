@@ -7,7 +7,7 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-//import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
+import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 
 type headFilm = {
   title: string,
@@ -50,10 +50,17 @@ function App(HeadFilmProps: headFilm): JSX.Element {
             path={':id'}
             element={<FilmScreen />}
           >
-            {/*<Route*/}
-            {/*  path={AppRoute.AddReview}*/}
-            {/*  element={<AddReviewScreen />}*/}
-            {/*/>*/}
+          </Route>
+          <Route
+            path={':id/review'}
+            element={
+              <PrivateRoute
+                authorizationStatus={AuthorizationStatus.Auth}
+              >
+                <AddReviewScreen />
+              </PrivateRoute>
+            }
+          >
           </Route>
         </Route>
 
