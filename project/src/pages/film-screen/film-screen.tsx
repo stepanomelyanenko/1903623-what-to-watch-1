@@ -1,4 +1,3 @@
-import InjectedSvg from '../../components/injected-svg/injected-svg';
 import Logo from '../../components/logo/logo';
 
 function FilmScreen(): JSX.Element {

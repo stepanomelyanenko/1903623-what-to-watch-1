@@ -1,5 +1,4 @@
 import FilmCard from '../../components/film-card/film-card';
-import InjectedSvg from '../../components/injected-svg/injected-svg';
 import Logo from '../../components/logo/logo';
 
 type MainScreenProps = {
