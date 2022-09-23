@@ -9,13 +9,13 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 
-type headFilm = {
+type HeadFilm = {
   title: string,
   genre: string,
   year: number
 }
 
-function App(HeadFilmProps: headFilm): JSX.Element {
+function App(HeadFilmProps: HeadFilm): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -37,14 +37,12 @@ function App(HeadFilmProps: headFilm): JSX.Element {
             </PrivateRoute>
           }
         />
-
         <Route path={AppRoute.Player}>
           <Route
             path={':id'}
             element={<PlayerScreen />}
           />
         </Route>
-
         <Route path={AppRoute.Film}>
           <Route
             path={':id'}
@@ -52,7 +50,7 @@ function App(HeadFilmProps: headFilm): JSX.Element {
           >
           </Route>
           <Route
-            path={':id/review'}
+            path={`:id${AppRoute.AddReview}`}
             element={
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
@@ -63,7 +61,6 @@ function App(HeadFilmProps: headFilm): JSX.Element {
           >
           </Route>
         </Route>
-
         <Route
           path={'*'}
           element={<NotFoundScreen />}
