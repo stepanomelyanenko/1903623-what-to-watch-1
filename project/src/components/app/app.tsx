@@ -8,20 +8,21 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
+import Promo from '../../types/promo';
+import Films from '../../types/films';
 
-type HeadFilm = {
-  title: string,
-  genre: string,
-  year: number
+type AppProps = {
+  promo: Promo,
+  films: Films
 }
 
-function App(HeadFilmProps: HeadFilm): JSX.Element {
+function App(props: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen headFilm = {HeadFilmProps} />}
+          element={<MainScreen promo={props.promo} films={props.films} />}
         />
         <Route
           path={AppRoute.SignIn}
