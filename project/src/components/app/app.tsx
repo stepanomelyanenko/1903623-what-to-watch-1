@@ -10,10 +10,12 @@ import PrivateRoute from '../private-route/private-route';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import Promo from '../../types/promo';
 import Films from '../../types/films';
+import Film from '../../types/film';
 
 type AppProps = {
   promo: Promo,
-  films: Films
+  films: Films,
+  film: Film
 }
 
 function App(props: AppProps): JSX.Element {
@@ -47,7 +49,7 @@ function App(props: AppProps): JSX.Element {
         <Route path={AppRoute.Film}>
           <Route
             path={':id'}
-            element={<FilmScreen />}
+            element={<FilmScreen film={props.film}/>}
           >
           </Route>
           <Route
