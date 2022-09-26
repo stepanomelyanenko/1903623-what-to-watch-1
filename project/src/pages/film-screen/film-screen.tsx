@@ -91,7 +91,13 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                 director={film.director}
                 starring={film.starring}
               />
-              <Details />
+              <Details
+                director={film.director}
+                starring={film.starring}
+                runTime={film.runTime}
+                genre={film.genre}
+                released={film.released}
+              />
               <Reviews />
 
             </div>
