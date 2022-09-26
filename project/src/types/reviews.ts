@@ -1,4 +1,4 @@
-type Comments = [{
+type Reviews = {
   comment: string
   date: string
   id: number
@@ -6,6 +6,6 @@ type Comments = [{
   user: {
     id: number
     name: string
-  }}];
+  }}[];
 
-export default Comments;
+export default Reviews;

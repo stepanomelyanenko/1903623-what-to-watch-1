@@ -1,4 +1,4 @@
-import ConvertTime from '../../utils/convertTime';
+import ConvertTime from '../../utils/convert-time';
 
 type DetailsProps = {
   director: string,

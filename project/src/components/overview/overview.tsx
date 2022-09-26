@@ -1,4 +1,4 @@
-import ConvertRates from '../../utils/convertRates';
+import ConvertRates from '../../utils/convert-rates';
 
 type OverviewProps = {
   rating: number,

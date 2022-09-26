@@ -4,6 +4,7 @@ import App from './components/app/app';
 import films from './mocks/films';
 import promo from './mocks/promo';
 import film from './mocks/film';
+import comments from './mocks/comments';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -15,6 +16,7 @@ root.render(
       promo={promo}
       films={films}
       film={film}
+      reviews={comments}
     />
   </React.StrictMode>,
 );

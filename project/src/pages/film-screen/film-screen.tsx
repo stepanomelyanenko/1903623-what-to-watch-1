@@ -1,15 +1,17 @@
 import Logo from '../../components/logo/logo';
 import Overview from '../../components/overview/overview';
 import Details from '../../components/details/details';
-import Reviews from '../../components/reviews/reviews';
+import ReviewList from '../../components/review-list/review-list';
 import Film from '../../types/film';
+import Reviews from '../../types/reviews';
 
 type FilmScreenProps = {
-  film: Film
+  film: Film,
+  reviews: Reviews
 }
 
 function FilmScreen(props: FilmScreenProps): JSX.Element {
-  const {film} = props;
+  const {film, reviews} = props;
   return (
     <>
       <section className="film-card film-card--full">
@@ -98,7 +100,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                 genre={film.genre}
                 released={film.released}
               />
-              <Reviews />
+              <ReviewList reviews={reviews}/>
 
             </div>
           </div>
