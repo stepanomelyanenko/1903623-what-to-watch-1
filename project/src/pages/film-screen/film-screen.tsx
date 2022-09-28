@@ -4,14 +4,17 @@ import Details from '../../components/details/details';
 import ReviewList from '../../components/review-list/review-list';
 import Film from '../../types/film';
 import Reviews from '../../types/reviews';
+import SimilarList from '../../components/similar-list/similar-list';
+import Similar from '../../types/similar';
 
 type FilmScreenProps = {
   film: Film,
-  reviews: Reviews
+  reviews: Reviews,
+  similar: Similar
 }
 
 function FilmScreen(props: FilmScreenProps): JSX.Element {
-  const {film, reviews} = props;
+  const {film, reviews, similar} = props;
   return (
     <>
       <section className="film-card film-card--full">
@@ -108,47 +111,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
       </section>
 
       <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
-        </section>
+        <SimilarList similar={similar} />
 
         <footer className="page-footer">
           <Logo isLightVersion />

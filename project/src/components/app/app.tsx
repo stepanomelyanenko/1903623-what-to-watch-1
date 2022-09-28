@@ -12,12 +12,14 @@ import Promo from '../../types/promo';
 import Films from '../../types/films';
 import Film from '../../types/film';
 import Reviews from '../../types/reviews';
+import Similar from '../../types/similar';
 
 type AppProps = {
   promo: Promo,
   films: Films,
   film: Film,
-  reviews: Reviews
+  reviews: Reviews,
+  similar: Similar
 }
 
 function App(props: AppProps): JSX.Element {
@@ -51,7 +53,7 @@ function App(props: AppProps): JSX.Element {
         <Route path={AppRoute.Film}>
           <Route
             path={':id'}
-            element={<FilmScreen film={props.film} reviews={props.reviews} />}
+            element={<FilmScreen film={props.film} reviews={props.reviews} similar={props.similar}/>}
           >
           </Route>
           <Route
