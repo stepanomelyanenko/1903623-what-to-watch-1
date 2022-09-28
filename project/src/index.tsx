@@ -6,6 +6,7 @@ import promo from './mocks/promo';
 import film from './mocks/film';
 import comments from './mocks/comments';
 import similar from './mocks/similar';
+import favorite from './mocks/favorite';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -19,6 +20,7 @@ root.render(
       film={film}
       reviews={comments}
       similar={similar}
+      favorite={favorite}
     />
   </React.StrictMode>,
 );

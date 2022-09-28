@@ -1,4 +1,4 @@
-type Favorite =[{
+type Favorite ={
   id: number
   name: string
   posterImage: string
@@ -11,11 +11,11 @@ type Favorite =[{
   rating: number
   scoresCount: number
   director: string
-  starring: [string]
+  starring: string[]
   runTime: number
   genre: string
   released: number
   isFavorite: boolean
-}];
+}[];
 
 export default Favorite;

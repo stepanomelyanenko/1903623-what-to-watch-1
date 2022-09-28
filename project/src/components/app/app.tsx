@@ -13,13 +13,15 @@ import Films from '../../types/films';
 import Film from '../../types/film';
 import Reviews from '../../types/reviews';
 import Similar from '../../types/similar';
+import Favorite from '../../types/favorite';
 
 type AppProps = {
   promo: Promo,
   films: Films,
   film: Film,
   reviews: Reviews,
-  similar: Similar
+  similar: Similar,
+  favorite: Favorite
 }
 
 function App(props: AppProps): JSX.Element {
@@ -38,9 +40,9 @@ function App(props: AppProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyListScreen />
+              <MyListScreen myList={props.favorite}/>
             </PrivateRoute>
           }
         />
