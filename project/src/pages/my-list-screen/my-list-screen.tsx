@@ -1,6 +1,6 @@
-import FilmCard from '../../components/film-card/film-card';
 import favorite from '../../types/favorite';
 import Logo from '../../components/logo/logo';
+import DevFilmCard from '../../components/dev-film-card/dev-film-card';
 
 type MyListProps = {
   myList: favorite
@@ -29,7 +29,7 @@ function MyListScreen({myList}: MyListProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {myList.map((film) => <FilmCard key={film.id} title={film.name} image={film.previewImage}/>)}
+          {myList.map((film) => <DevFilmCard key={film.id} title={film.name} image={film.previewImage}/>)}
         </div>
       </section>
 

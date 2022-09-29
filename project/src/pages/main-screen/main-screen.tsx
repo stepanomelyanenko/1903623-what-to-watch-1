@@ -1,6 +1,6 @@
 import Logo from '../../components/logo/logo';
 import PromoCard from '../../components/promo-card/promo-card';
-import FilmList from '../../components/film-catalog/film-list';
+import FilmList from '../../components/film-list/film-list';
 import Promo from '../../types/promo';
 import Films from '../../types/films';
 
