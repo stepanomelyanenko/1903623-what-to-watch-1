@@ -47,8 +47,6 @@ function FilmList({films}: FilmListProps): JSX.Element {
       </ul>
 
       <div className="catalog__films-list">
-
-        {/* решить вопрос со стейтем*/}
         {films.map((film) => (
           <FilmCard
             id={film.id}
@@ -58,7 +56,6 @@ function FilmList({films}: FilmListProps): JSX.Element {
             mouseOverHandler={(evt: MouseEvent<HTMLDivElement>) => {
               evt.preventDefault();
               setPointedFilm(film.id);
-              console.log(pointedFilm);
             }}
           />)
         )}

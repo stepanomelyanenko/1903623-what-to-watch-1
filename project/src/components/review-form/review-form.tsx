@@ -10,14 +10,14 @@ function ReviewForm(): JSX.Element {
     setFormData({...formData, reviewText: evt.target.value});
     // const {name, value} = evt.target;
     // setFormData({...formData, [name]: value});
-    console.log(formData);
+    // console.log(formData);
   };
 
   const ratingChangeHandle = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, rating: parseInt(evt.target.value, 10)});
     // const {name, value} = evt.target;
     // setFormData({...formData, [name]: parseInt(value)});
-    console.log(formData);
+    // console.log(formData);
   };
 
   return (
