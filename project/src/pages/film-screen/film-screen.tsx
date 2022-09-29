@@ -2,25 +2,35 @@ import Logo from '../../components/logo/logo';
 import Overview from '../../components/overview/overview';
 import Details from '../../components/details/details';
 import ReviewList from '../../components/review-list/review-list';
-import Film from '../../types/film';
 import Reviews from '../../types/reviews';
 import SimilarList from '../../components/similar-list/similar-list';
 import Similar from '../../types/similar';
+import {useParams} from 'react-router-dom';
+import Films from '../../types/films';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type FilmScreenProps = {
-  film: Film,
+  films: Films,
   reviews: Reviews,
   similar: Similar
 }
 
 function FilmScreen(props: FilmScreenProps): JSX.Element {
-  const {film, reviews, similar} = props;
+  const {films, reviews, similar} = props;
+
+  const id = Number(useParams().id);
+  const film = films.find((x) => x.id === id);
+
+  if (!film) {
+    return <NotFoundScreen />;
+  }
+
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -42,10 +52,10 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{film.genre}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -71,7 +81,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">

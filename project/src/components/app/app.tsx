@@ -10,7 +10,6 @@ import PrivateRoute from '../private-route/private-route';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import Promo from '../../types/promo';
 import Films from '../../types/films';
-import Film from '../../types/film';
 import Reviews from '../../types/reviews';
 import Similar from '../../types/similar';
 import Favorite from '../../types/favorite';
@@ -18,7 +17,6 @@ import Favorite from '../../types/favorite';
 type AppProps = {
   promo: Promo,
   films: Films,
-  film: Film,
   reviews: Reviews,
   similar: Similar,
   favorite: Favorite
@@ -55,7 +53,7 @@ function App(props: AppProps): JSX.Element {
         <Route path={AppRoute.Film}>
           <Route
             path={':id'}
-            element={<FilmScreen film={props.film} reviews={props.reviews} similar={props.similar}/>}
+            element={<FilmScreen films={props.films} reviews={props.reviews} similar={props.similar}/>}
           >
           </Route>
           <Route

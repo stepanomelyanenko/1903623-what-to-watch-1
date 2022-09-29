@@ -51,6 +51,7 @@ function FilmList({films}: FilmListProps): JSX.Element {
         {/* решить вопрос со стейтем*/}
         {films.map((film) => (
           <FilmCard
+            id={film.id}
             key={film.id}
             title={film.name}
             image={film.previewImage}
