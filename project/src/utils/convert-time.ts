@@ -1,4 +1,4 @@
-function ConvertTime(timeInMinutes: number): string {
+function convertTime(timeInMinutes: number): string {
   const hours = parseInt(String((timeInMinutes) / 60), 10);
   const minutes = timeInMinutes - hours * 60;
 
@@ -12,4 +12,4 @@ function ConvertTime(timeInMinutes: number): string {
   return `${diffHours} ${diffMinutes}`;
 }
 
-export default ConvertTime;
+export default convertTime;

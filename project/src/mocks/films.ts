@@ -1,6 +1,6 @@
 import Films from '../types/films';
 
-const films: Films = [
+const FILMS: Films = [
   {
     'name': 'Snatch',
     'posterImage': 'https://10.react.pages.academy/static/film/poster/Snatch.jpg',
@@ -187,4 +187,4 @@ const films: Films = [
   }
 ];
 
-export default films;
+export default FILMS;

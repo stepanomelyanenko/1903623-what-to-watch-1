@@ -1,4 +1,4 @@
-import ConvertDate from '../../utils/convert-date';
+import convertDate from '../../utils/convert-date';
 
 type ReviewCardProps = {
   comment: string,
@@ -19,7 +19,12 @@ function ReviewCard(props: ReviewCardProps): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{user.name}</cite>
-          <time className="review__date" dateTime={ConvertDate(date, true)}>{ConvertDate(date, false)}</time>
+          <time
+            className="review__date"
+            dateTime={convertDate(date, true)}
+          >
+            {convertDate(date, false)}
+          </time>
         </footer>
       </blockquote>
 

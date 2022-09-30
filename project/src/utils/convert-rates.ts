@@ -1,4 +1,4 @@
-function ConvertRates(rating: number): string {
+function convertRates(rating: number): string {
   if (rating >= 0 && rating < 3) {
     return 'Bad';
   }
@@ -17,4 +17,4 @@ function ConvertRates(rating: number): string {
   return 'None';
 }
 
-export default ConvertRates;
+export default convertRates;

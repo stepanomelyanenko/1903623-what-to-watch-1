@@ -6,18 +6,12 @@ function ReviewForm(): JSX.Element {
     reviewText: '',
   });
 
-  const fieldChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+  const textareaChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({...formData, reviewText: evt.target.value});
-    // const {name, value} = evt.target;
-    // setFormData({...formData, [name]: value});
-    // console.log(formData);
   };
 
   const ratingChangeHandle = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, rating: parseInt(evt.target.value, 10)});
-    // const {name, value} = evt.target;
-    // setFormData({...formData, [name]: parseInt(value)});
-    // console.log(formData);
   };
 
   return (
@@ -50,9 +44,8 @@ function ReviewForm(): JSX.Element {
           <textarea
             className="add-review__textarea"
             name="review-text"
-            id="review-text"
             placeholder="Review text"
-            onChange={fieldChangeHandle}
+            onChange={textareaChangeHandle}
             value={formData.reviewText}
           >
 

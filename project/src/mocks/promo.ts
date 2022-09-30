@@ -1,6 +1,6 @@
-import Promo from '../types/promo';
+import PROMO from '../types/promo';
 
-const promo: Promo = {
+const promo: PROMO = {
   'id': 1,
   'name': 'The Grand Budapest Hotel',
   'posterImage': 'img/the-grand-budapest-hotel-poster.jpg',

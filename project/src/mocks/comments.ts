@@ -1,4 +1,4 @@
-const comments = [
+const COMMENTS = [
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the directors funniest and most exquisitely designed movies in years.',
     'date': 'Mon Sep 26 2022 13:19:35 GMT+0500 (Екатеринбург, стандартное время)',
@@ -21,4 +21,4 @@ const comments = [
   }
 ];
 
-export default comments;
+export default COMMENTS;

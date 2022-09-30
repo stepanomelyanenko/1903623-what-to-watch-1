@@ -1,4 +1,4 @@
-import ConvertTime from '../../utils/convert-time';
+import convertTime from '../../utils/convert-time';
 
 type DetailsProps = {
   director: string,
@@ -28,7 +28,7 @@ function Details(props: DetailsProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{ConvertTime(runTime)}</span>
+          <span className="film-card__details-value">{convertTime(runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

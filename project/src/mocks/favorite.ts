@@ -1,4 +1,4 @@
-const favorite = [
+const FAVORITE = [
   {
     'id': 1,
     'name': 'The Grand Budapest Hotel',
@@ -45,4 +45,4 @@ const favorite = [
   }
 ];
 
-export default favorite;
+export default FAVORITE;

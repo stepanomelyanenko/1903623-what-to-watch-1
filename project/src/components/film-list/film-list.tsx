@@ -53,7 +53,7 @@ function FilmList({films}: FilmListProps): JSX.Element {
             key={film.id}
             title={film.name}
             image={film.previewImage}
-            mouseOverHandler={(evt: MouseEvent<HTMLDivElement>) => {
+            onMouseOver={(evt: MouseEvent<HTMLDivElement>) => {
               evt.preventDefault();
               setPointedFilm(film.id);
             }}

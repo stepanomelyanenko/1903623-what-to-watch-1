@@ -1,4 +1,4 @@
-import ConvertRates from '../../utils/convert-rates';
+import convertRates from '../../utils/convert-rates';
 
 type OverviewProps = {
   rating: number,
@@ -16,7 +16,7 @@ function Overview(props: OverviewProps): JSX.Element {
       <div className="film-rating">
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{ConvertRates(rating)}</span>
+          <span className="film-rating__level">{convertRates(rating)}</span>
           <span className="film-rating__count">{scoresCount}</span>
         </p>
       </div>
@@ -26,7 +26,9 @@ function Overview(props: OverviewProps): JSX.Element {
 
         <p className="film-card__director"><strong>Director: {director}</strong></p>
 
-        <p className="film-card__starring"><strong>Starring: {starring.join(', ')} and other</strong></p>
+        <p className="film-card__starring">
+          <strong>Starring: {starring.join(', ')} and other</strong>
+        </p>
       </div>
     </>
   );

@@ -1,5 +1,7 @@
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
+import {AppRoute} from '../../const';
+import {Link} from 'react-router-dom';
 
 function AddReviewScreen(): JSX.Element {
   return (
@@ -20,7 +22,9 @@ function AddReviewScreen(): JSX.Element {
                 <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link className="breadcrumbs__link" to={`${AppRoute.Film}/:id${AppRoute.AddReview}`}>
+                  Add review
+                </Link>
               </li>
             </ul>
           </nav>
