@@ -57,7 +57,7 @@ function FilmList({films}: FilmListProps): JSX.Element {
             previewVideo={film.previewVideoLink}
 
             isPointed={pointedFilm === film.id}
-            changeParentState={(pointedId: number) => {
+            changePointedFilm={(pointedId: number) => {
               setPointedFilm(pointedId);
             }}
 

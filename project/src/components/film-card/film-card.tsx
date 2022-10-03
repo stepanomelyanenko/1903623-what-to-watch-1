@@ -8,17 +8,17 @@ type FilmCardProps = {
   image: string,
   previewVideo: string,
   isPointed: boolean,
-  changeParentState: (id: number) => void
+  changePointedFilm: (id: number) => void
 }
 
 function FilmCard(props: FilmCardProps): JSX.Element {
-  const {id, title, image, previewVideo, isPointed, changeParentState} = props;
+  const {id, title, image, previewVideo, isPointed, changePointedFilm} = props;
 
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={() => changeParentState(id)}
-      onMouseLeave={() => changeParentState(NaN)}
+      onMouseEnter={() => changePointedFilm(id)}
+      onMouseLeave={() => changePointedFilm(NaN)}
     >
       <div className="small-film-card__image">
         {

@@ -1,13 +1,11 @@
 import Logo from '../../components/logo/logo';
-import Overview from '../../components/overview/overview';
-import Details from '../../components/details/details';
-import ReviewList from '../../components/review-list/review-list';
 import Reviews from '../../types/reviews';
 import SimilarList from '../../components/similar-list/similar-list';
 import Similar from '../../types/similar';
 import {useParams} from 'react-router-dom';
 import Films from '../../types/films';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import FilmDescription from '../../components/film-description/film-description';
 
 type FilmScreenProps = {
   films: Films,
@@ -84,38 +82,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
               <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <Overview
-                rating={film.rating}
-                scoresCount={film.scoresCount}
-                description={film.description}
-                director={film.director}
-                starring={film.starring}
-              />
-              <Details
-                director={film.director}
-                starring={film.starring}
-                runTime={film.runTime}
-                genre={film.genre}
-                released={film.released}
-              />
-              <ReviewList reviews={reviews}/>
-
-            </div>
+            <FilmDescription film={film} reviews={reviews} />
           </div>
         </div>
       </section>
