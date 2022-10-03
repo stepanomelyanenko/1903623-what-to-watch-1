@@ -1,4 +1,4 @@
-import {useState, MouseEvent} from 'react';
+import {useState} from 'react';
 import FilmCard from '../film-card/film-card';
 import Films from '../../types/films';
 
@@ -7,7 +7,7 @@ type FilmListProps = {
 }
 
 function FilmList({films}: FilmListProps): JSX.Element {
-  const [pointedFilm, setPointedFilm] = useState(0);
+  const [pointedFilm, setPointedFilm] = useState(NaN);
 
   return (
     <section className="catalog">
@@ -49,14 +49,18 @@ function FilmList({films}: FilmListProps): JSX.Element {
       <div className="catalog__films-list">
         {films.map((film) => (
           <FilmCard
-            id={film.id}
             key={film.id}
+            id={film.id}
+
             title={film.name}
             image={film.previewImage}
-            onMouseOver={(evt: MouseEvent<HTMLDivElement>) => {
-              evt.preventDefault();
-              setPointedFilm(film.id);
+            previewVideo={film.previewVideoLink}
+
+            isPointed={pointedFilm === film.id}
+            changeParentState={(pointedId: number) => {
+              setPointedFilm(pointedId);
             }}
+
           />)
         )}
       </div>
