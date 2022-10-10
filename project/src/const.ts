@@ -20,16 +20,29 @@ export enum FilmPageTabs {
 }
 
 export enum Genres {
-  All = 'ALL',
-  Comedies = 'COMEDIES',
-  Crime = 'CRIME',
-  Documentary = 'DOCUMENTARY',
-  Dramas = 'DRAMAS',
-  Horror = 'HORROR',
-  KidsFamily = 'KIDS_FAMILY',
-  Romance = 'ROMANCE',
-  SciFi = 'SCI_FI',
+  All = 'All genres',
+  Comedies = 'Comedies',
+  Crime = 'Crime',
+  Documentary = 'Documentary',
+  Dramas = 'Dramas',
+  Horror = 'Horror',
+  KidsFamily = 'Kids & Family',
+  Romance = 'Romance',
+  SciFi = 'Sci-Fi',
   Thrillers = 'Thrillers'
 }
+
+export const GenresArray = [
+  'All genres',
+  'Comedies',
+  'Crime',
+  'Documentary',
+  'Dramas',
+  'Horror',
+  'Kids & Family',
+  'Romance',
+  'Sci-Fi',
+  'Thrillers'
+];
 
 export const VIDEO_PREVIEW_DELAY = 1000;

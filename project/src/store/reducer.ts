@@ -7,7 +7,5 @@ const initialState = {
   films: films,
 };
 
-export const reducer = createReducer(initialState, (builder) => {
-
-});
+export const reducer = createReducer(initialState, (builder) => null);
 
