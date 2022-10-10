@@ -32,6 +32,8 @@ export enum Genres {
   Thrillers = 'Thrillers'
 }
 
+export const DEFAULT_GENRE = 'All genres';
+
 export const GenresArray = [
   'All genres',
   'Comedies',
