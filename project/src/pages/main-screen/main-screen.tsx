@@ -2,11 +2,9 @@ import Logo from '../../components/logo/logo';
 import PromoCard from '../../components/promo-card/promo-card';
 import FilmList from '../../components/film-list/film-list';
 import Promo from '../../types/promo';
-import Films from '../../types/films';
 
 type MainScreenProps = {
   promo: Promo,
-  films: Films
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
@@ -15,7 +13,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
       <PromoCard promo={props.promo} />
 
       <div className="page-content">
-        <FilmList films={props.films} />
+        <FilmList />
 
         <footer className="page-footer">
           <Logo isLightVersion />

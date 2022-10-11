@@ -1,17 +1,11 @@
 import {useState} from 'react';
 import FilmCard from '../film-card/film-card';
-import Films from '../../types/films';
 import GenresFilter from '../genres-filter/genres-filter';
 import {useAppSelector} from '../../hooks';
-import {getFilmsByGenre} from '../../utils/get-films-by-genre';
 
-type FilmListProps = {
-  films: Films
-}
-
-function FilmList({films}: FilmListProps): JSX.Element {
+function FilmList(): JSX.Element {
   const [pointedFilm, setPointedFilm] = useState(NaN);
-  const currentGenre = useAppSelector((state) => state.currentGenre);
+  const films = useAppSelector((state) => state.shownFilms);
 
   return (
     <section className="catalog">
@@ -20,7 +14,7 @@ function FilmList({films}: FilmListProps): JSX.Element {
       <GenresFilter />
 
       <div className="catalog__films-list">
-        {getFilmsByGenre(films, currentGenre).map((film) => (
+        {films.map((film) => (
           <FilmCard
             key={film.id}
             id={film.id}
@@ -34,8 +28,7 @@ function FilmList({films}: FilmListProps): JSX.Element {
               setPointedFilm(pointedId);
             }}
 
-          />)
-        )}
+          />))}
       </div>
 
       <div className="catalog__more">

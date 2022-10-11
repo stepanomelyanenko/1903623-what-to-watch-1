@@ -1,6 +1,8 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import PreviewPlayer from '../preview-player/preview-player';
+import {useAppDispatch} from '../../hooks';
+import {resetMainScreen} from '../../store/action';
 
 type FilmCardProps = {
   id: number,
@@ -13,6 +15,8 @@ type FilmCardProps = {
 
 function FilmCard(props: FilmCardProps): JSX.Element {
   const {id, title, image, previewVideo, isPointed, onChangePointedFilm: onChangePointedFilm} = props;
+
+  const dispatch = useAppDispatch();
 
   return (
     <article
@@ -27,7 +31,14 @@ function FilmCard(props: FilmCardProps): JSX.Element {
         }
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`${AppRoute.Film}/${id}`}>{title}</Link>
+        <Link
+          className="small-film-card__link"
+          to={`${AppRoute.Film}/${id}`}
+          onClick={() => (
+            dispatch(resetMainScreen()))}
+        >
+          {title}
+        </Link>
       </h3>
     </article>
   );
