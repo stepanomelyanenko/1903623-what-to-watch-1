@@ -2,10 +2,12 @@ import {useState} from 'react';
 import FilmCard from '../film-card/film-card';
 import GenresFilter from '../genres-filter/genres-filter';
 import {useAppSelector} from '../../hooks';
+import ShowMoreButton from '../show-more-button/show-more-button';
 
 function FilmList(): JSX.Element {
   const [pointedFilm, setPointedFilm] = useState(NaN);
-  const films = useAppSelector((state) => state.shownFilms);
+  const films = useAppSelector((state) => state.filteredFilms);
+  const cardCount = useAppSelector((state) => state.cardCount);
 
   return (
     <section className="catalog">
@@ -14,7 +16,7 @@ function FilmList(): JSX.Element {
       <GenresFilter />
 
       <div className="catalog__films-list">
-        {films.map((film) => (
+        {films.slice(0, cardCount).map((film) => (
           <FilmCard
             key={film.id}
             id={film.id}
@@ -31,9 +33,7 @@ function FilmList(): JSX.Element {
           />))}
       </div>
 
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">Show more</button>
-      </div>
+      <ShowMoreButton isAllCardsLoaded={cardCount !== films.length}/>
     </section>
   );
 }
