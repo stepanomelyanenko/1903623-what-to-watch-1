@@ -1,10 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
 import films from '../mocks/films';
-import {DEFAULT_GENRE, FilmPageTabs} from '../const';
+import {AuthorizationStatus, DEFAULT_GENRE, FilmPageTabs} from '../const';
 import {
   changeFilmTab,
   changeGenre,
-  increaseCardCount, loadFilms,
+  increaseCardCount, loadFilms, requireAuthorization,
   resetCardCount,
   resetFilmScreen,
   resetMainScreen
@@ -17,6 +17,8 @@ const initialState = {
   currentGenre: DEFAULT_GENRE,
   filteredFilms: films,
   cardCount: films.length < 8 ? films.length : 8,
+
+  authorizationStatus: AuthorizationStatus.Unknown,
 
   filmPageTab: FilmPageTabs.Overview as string,
 };
@@ -60,5 +62,8 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
     })
-  ;
+
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    });
 });
