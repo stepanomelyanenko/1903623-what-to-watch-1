@@ -1,5 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import MainScreen from '../../pages/main-screen/main-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
@@ -13,6 +13,9 @@ import Films from '../../types/films';
 import Reviews from '../../types/reviews';
 import Similar from '../../types/similar';
 import Favorite from '../../types/favorite';
+import {useAppSelector} from '../../hooks';
+import {isCheckedAuth} from '../../utils/check-auth';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 type AppProps = {
   promo: Promo,
@@ -23,6 +26,14 @@ type AppProps = {
 }
 
 function App(props: AppProps): JSX.Element {
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+
+  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -38,7 +49,7 @@ function App(props: AppProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <MyListScreen myList={props.favorite}/>
             </PrivateRoute>
@@ -60,7 +71,7 @@ function App(props: AppProps): JSX.Element {
             path={`:id${AppRoute.AddReview}`}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
               >
                 <AddReviewScreen />
               </PrivateRoute>
