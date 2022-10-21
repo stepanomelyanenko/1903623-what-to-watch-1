@@ -83,7 +83,7 @@ function SignInScreen(): JSX.Element {
                   });
                 }
 
-                navigate(AppRoute.Root);
+                // navigate(AppRoute.Root);
 
               }}
             >
