@@ -4,7 +4,7 @@ import {DEFAULT_GENRE, FilmPageTabs} from '../const';
 import {
   changeFilmTab,
   changeGenre,
-  increaseCardCount,
+  increaseCardCount, loadFilms,
   resetCardCount,
   resetFilmScreen,
   resetMainScreen
@@ -55,5 +55,10 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeFilmTab, (state, action) => {
       state.filmPageTab = action.payload.currentTab;
-    });
+    })
+
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+    })
+  ;
 });
