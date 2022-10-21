@@ -22,3 +22,9 @@ export enum FilmPageTabs {
 export const DEFAULT_GENRE = 'All genres';
 
 export const VIDEO_PREVIEW_DELAY = 1000;
+
+export enum APIRoute {
+  Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
+}
