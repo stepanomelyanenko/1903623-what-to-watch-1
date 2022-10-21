@@ -15,19 +15,20 @@ function SignInScreen(): JSX.Element {
   const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
+    console.log("DID IT");
     dispatch(loginAction(authData));
   };
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-
-    if (emailRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      });
-    }
-  };
+  // const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  //   evt.preventDefault();
+  //
+  //   if (emailRef.current !== null && passwordRef.current !== null) {
+  //     onSubmit({
+  //       email: emailRef.current.value,
+  //       password: passwordRef.current.value,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="user-page">
@@ -41,7 +42,7 @@ function SignInScreen(): JSX.Element {
         <form
           action="#"
           className="sign-in__form"
-          onSubmit={handleSubmit}
+          //onSubmit={handleSubmit}
         >
           <div className="sign-in__fields">
             <div className="sign-in__field">
@@ -71,7 +72,20 @@ function SignInScreen(): JSX.Element {
             <button
               className="sign-in__btn"
               type="submit"
-              onClick={() => navigate(AppRoute.Root)}
+
+              onClick={(evt) => {
+                evt.preventDefault();
+
+                if (emailRef.current !== null && passwordRef.current !== null) {
+                  onSubmit({
+                    email: emailRef.current.value,
+                    password: passwordRef.current.value,
+                  });
+                }
+
+                navigate(AppRoute.Root);
+
+              }}
             >
               Sign in
             </button>
