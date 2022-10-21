@@ -11,7 +11,8 @@ const resetCardCount = createAction('main/resetCardCount');
 const resetFilmScreen = createAction('film/resetState');
 const changeFilmTab = createAction<{ currentTab: string }>('film/changeFilmTab');
 
-const loadFilms = createAction<Films>('data/loadFilms')
+const loadFilms = createAction<Films>('data/loadFilms');
+const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
@@ -25,6 +26,7 @@ export {
   resetFilmScreen,
   changeFilmTab,
   loadFilms,
+  setDataLoadedStatus,
   requireAuthorization,
   setError
 };

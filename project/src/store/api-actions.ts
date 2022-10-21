@@ -3,15 +3,14 @@ import {AppDispatch, State} from '../types/state';
 import {AxiosInstance} from 'axios';
 import Films from '../types/films';
 import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
-import {loadFilms, requireAuthorization, setError} from './action';
+import {loadFilms, requireAuthorization, setDataLoadedStatus, setError} from './action';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {dropToken, saveToken} from '../services/token';
 import {store} from './index';
 
-
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'app/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),
@@ -28,7 +27,9 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Films>(APIRoute.Films);
+    dispatch(setDataLoadedStatus(true));
     dispatch(loadFilms(data));
+    dispatch(setDataLoadedStatus(false));
   },
 );
 

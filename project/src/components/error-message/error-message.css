@@ -6,4 +6,5 @@
   background-color: #d96666;
   color: white;
   border-radius: 5px;
+  z-index: -1000;
 }

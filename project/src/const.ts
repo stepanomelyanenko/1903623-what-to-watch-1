@@ -22,11 +22,12 @@ export enum FilmPageTabs {
 export const DEFAULT_GENRE = 'All genres';
 
 export const VIDEO_PREVIEW_DELAY = 1000;
-export const TIMEOUT_SHOW_ERROR = 2000;
-
+export const TIMEOUT_SHOW_ERROR = 5000;
 
 export enum APIRoute {
   Films = '/films',
   Login = '/login',
   Logout = '/logout',
 }
+
+export const CARDS_PER_STEP = 8;
