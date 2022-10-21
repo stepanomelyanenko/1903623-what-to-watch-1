@@ -15,6 +15,8 @@ const loadFilms = createAction<Films>('data/loadFilms')
 
 const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
+const setError = createAction<string | null>('app/setError');
+
 export {
   resetMainScreen,
   changeGenre,
@@ -23,5 +25,6 @@ export {
   resetFilmScreen,
   changeFilmTab,
   loadFilms,
-  requireAuthorization
+  requireAuthorization,
+  setError
 };
