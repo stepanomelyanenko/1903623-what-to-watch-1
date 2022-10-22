@@ -4,7 +4,7 @@ import {AuthorizationStatus, CARDS_PER_STEP, DEFAULT_GENRE, FilmPageTabs} from '
 import {
   changeFilmTab,
   changeGenre,
-  increaseCardCount, loadFilms, requireAuthorization,
+  increaseCardCount, setAvatar, loadFilms, requireAuthorization,
   resetCardCount,
   resetFilmScreen,
   resetMainScreen, setDataLoadedStatus, setError
@@ -20,7 +20,8 @@ type InitialState = {
   authorizationStatus: string,
   isDataLoaded: boolean,
   filmPageTab: string,
-  error: string | null
+  error: string | null,
+  avatar: string | null
 }
 
 const initialState: InitialState = {
@@ -35,7 +36,8 @@ const initialState: InitialState = {
 
   filmPageTab: FilmPageTabs.Overview as string,
 
-  error: null
+  error: null,
+  avatar: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -89,5 +91,9 @@ export const reducer = createReducer(initialState, (builder) => {
 
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+
+    .addCase(setAvatar, (state, action) => {
+      state.avatar = action.payload;
     });
 });
