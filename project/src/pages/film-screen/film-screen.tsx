@@ -9,6 +9,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {useEffect} from 'react';
 import {setDataLoadedStatus} from '../../store/action';
 import {fetchCommentsByID, fetchFilmByID, fetchSimilarByID} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function FilmScreen(): JSX.Element {
   const id = Number(useParams().id);
@@ -17,6 +18,7 @@ function FilmScreen(): JSX.Element {
   const comments = useAppSelector((state) => state.comments);
   const similar = useAppSelector((state) => state.similar);
   const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const loadStatus = useAppSelector((state) => state.isDataLoaded);
 
   const dispatch = useAppDispatch();
 
@@ -27,6 +29,10 @@ function FilmScreen(): JSX.Element {
     dispatch(fetchSimilarByID(id.toString()));
     dispatch(setDataLoadedStatus(false));
   }, [id, dispatch]);
+
+  if (loadStatus) {
+    return(<LoadingScreen />);
+  }
 
   if (!film) {
     return <NotFoundScreen />;

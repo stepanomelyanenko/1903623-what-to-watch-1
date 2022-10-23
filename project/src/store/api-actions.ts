@@ -21,6 +21,7 @@ import {store} from './index';
 import Similar from '../types/similar';
 import Film from '../types/film';
 import {Comments} from '../types/comments';
+import {UserComment} from '../types/user-comment';
 
 export const clearErrorAction = createAsyncThunk(
   'app/clearError',
@@ -125,5 +126,19 @@ export const fetchSimilarByID = createAsyncThunk<void, string, {
   async (filmId: string, {dispatch, extra: api}) => {
     const {data} = await api.get<Similar>(`${APIRoute.Films}/${filmId}${APIRoute.Similar}`);
     dispatch(loadSimilar(data));
+  },
+);
+
+export const postComment = createAsyncThunk<void, UserComment, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/postCommentById',
+  async ({comment, rating, filmId}, {dispatch, extra: api}) => {
+    dispatch(setDataLoadedStatus(true));
+    await api.post<UserComment>(`${APIRoute.Comments}/${filmId}`, {comment, rating});
+    dispatch(redirectToRoute(`${APIRoute.Films}/${filmId}`));
+    dispatch(setDataLoadedStatus(false));
   },
 );
