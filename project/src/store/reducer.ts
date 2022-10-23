@@ -1,5 +1,4 @@
 import {createReducer} from '@reduxjs/toolkit';
-//import films from '../mocks/films';
 import {AuthorizationStatus, CARDS_PER_STEP, DEFAULT_GENRE, FilmPageTabs} from '../const';
 import {
   changeFilmTab,
@@ -7,10 +6,13 @@ import {
   increaseCardCount, setAvatar, loadFilms, requireAuthorization,
   resetCardCount,
   resetFilmScreen,
-  resetMainScreen, setDataLoadedStatus, setError
+  resetMainScreen, setDataLoadedStatus, setError, loadFilm, loadComments, loadSimilar
 } from './action';
 import {filterFilmsByGenre} from '../utils/filter-films-by-genre';
 import Films from '../types/films';
+import {Comments} from '../types/comments';
+import Similar from '../types/similar';
+import Film from '../types/film';
 
 type InitialState = {
   films: Films;
@@ -21,7 +23,11 @@ type InitialState = {
   isDataLoaded: boolean,
   filmPageTab: string,
   error: string | null,
-  avatar: string | null
+  avatar: string | null,
+
+  comments: Comments,
+  similar: Similar,
+  film: Film | null
 }
 
 const initialState: InitialState = {
@@ -37,7 +43,11 @@ const initialState: InitialState = {
   filmPageTab: FilmPageTabs.Overview as string,
 
   error: null,
-  avatar: null
+  avatar: null,
+
+  comments: [],
+  similar: [],
+  film: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -54,7 +64,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.filteredFilms = filteredFilms;
       state.cardCount = filteredFilms.length < CARDS_PER_STEP ?
         filteredFilms.length :
-        8;
+        CARDS_PER_STEP;
     })
 
     .addCase(increaseCardCount, (state) => {
@@ -95,5 +105,15 @@ export const reducer = createReducer(initialState, (builder) => {
 
     .addCase(setAvatar, (state, action) => {
       state.avatar = action.payload;
+    })
+
+    .addCase(loadFilm, (state, action) => {
+      state.film = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(loadSimilar, (state, action) => {
+      state.similar = action.payload;
     });
 });

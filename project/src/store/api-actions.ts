@@ -3,11 +3,24 @@ import {AppDispatch, State} from '../types/state';
 import {AxiosInstance} from 'axios';
 import Films from '../types/films';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
-import {setAvatar, loadFilms, redirectToRoute, requireAuthorization, setDataLoadedStatus, setError} from './action';
+import {
+  setAvatar,
+  loadFilms,
+  redirectToRoute,
+  requireAuthorization,
+  setDataLoadedStatus,
+  setError,
+  loadComments,
+  loadFilm,
+  loadSimilar
+} from './action';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {dropToken, saveToken} from '../services/token';
 import {store} from './index';
+import Similar from '../types/similar';
+import Film from '../types/film';
+import {Comments} from '../types/comments';
 
 export const clearErrorAction = createAsyncThunk(
   'app/clearError',
@@ -76,5 +89,41 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     dispatch(setAvatar(null));
     dispatch(redirectToRoute(AppRoute.Root));
+  },
+);
+
+export const fetchFilmByID = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchFilmById',
+  async (filmId: string, {dispatch, extra: api}) => {
+    const {data} = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
+    dispatch(loadFilm(data));
+  },
+);
+
+export const fetchCommentsByID = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchCommentsById',
+  async (filmId: string, {dispatch, extra: api}) => {
+    const {data} = await api.get<Comments>(`${APIRoute.Comments}/${filmId}`);
+    dispatch(loadComments(data));
+  },
+);
+
+export const fetchSimilarByID = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchSimilarById',
+  async (filmId: string, {dispatch, extra: api}) => {
+    const {data} = await api.get<Similar>(`${APIRoute.Films}/${filmId}${APIRoute.Similar}`);
+    dispatch(loadSimilar(data));
   },
 );

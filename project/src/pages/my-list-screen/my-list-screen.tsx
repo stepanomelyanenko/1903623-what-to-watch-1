@@ -23,7 +23,7 @@ function MyListScreen({myList}: MyListProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {myList.map((film) => <DevFilmCard key={film.id} title={film.name} image={film.previewImage}/>)}
+          {myList.map((film) => <DevFilmCard key={film.id} id={film.id} title={film.name} image={film.previewImage}/>)}
         </div>
       </section>
 

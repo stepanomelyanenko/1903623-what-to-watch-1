@@ -34,8 +34,9 @@ function FilmCard(props: FilmCardProps): JSX.Element {
         <Link
           className="small-film-card__link"
           to={`${AppRoute.Film}/${id}`}
-          onClick={() => (
-            dispatch(resetMainScreen()))}
+          onClick={() => {
+            dispatch(resetMainScreen());
+          }}
         >
           {title}
         </Link>

@@ -1,10 +1,8 @@
 import Logo from '../../components/logo/logo';
-import {useNavigate} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
-import {FormEvent, useRef} from 'react';
+import {useRef} from 'react';
 import {loginAction} from '../../store/api-actions';
 import {AuthData} from '../../types/auth-data';
-import {AppRoute} from '../../const';
 
 function SignInScreen(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -12,10 +10,8 @@ function SignInScreen(): JSX.Element {
 
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
-    console.log("DID IT");
     dispatch(loginAction(authData));
   };
 

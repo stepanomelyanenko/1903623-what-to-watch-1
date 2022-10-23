@@ -1,24 +1,32 @@
 import Logo from '../../components/logo/logo';
-import Reviews from '../../types/reviews';
 import SimilarList from '../../components/similar-list/similar-list';
-import Similar from '../../types/similar';
-import {useParams} from 'react-router-dom';
-import Films from '../../types/films';
+import {Link, useParams} from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FilmDescription from '../../components/film-description/film-description';
 import UserBlock from '../../components/user-block/user-block';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {useEffect} from 'react';
+import {setDataLoadedStatus} from '../../store/action';
+import {fetchCommentsByID, fetchFilmByID, fetchSimilarByID} from '../../store/api-actions';
 
-type FilmScreenProps = {
-  films: Films,
-  reviews: Reviews,
-  similar: Similar
-}
-
-function FilmScreen(props: FilmScreenProps): JSX.Element {
-  const {films, reviews, similar} = props;
-
+function FilmScreen(): JSX.Element {
   const id = Number(useParams().id);
-  const film = films.find((x) => x.id === id);
+
+  const film = useAppSelector((state) => state.film);
+  const comments = useAppSelector((state) => state.comments);
+  const similar = useAppSelector((state) => state.similar);
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setDataLoadedStatus(true));
+    dispatch(fetchFilmByID(id.toString()));
+    dispatch(fetchCommentsByID(id.toString()));
+    dispatch(fetchSimilarByID(id.toString()));
+    dispatch(setDataLoadedStatus(false));
+  }, [id, dispatch]);
 
   if (!film) {
     return <NotFoundScreen />;
@@ -62,7 +70,8 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                { authStatus === AuthorizationStatus.Auth &&
+                  <Link to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -74,7 +83,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
               <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
-            <FilmDescription film={film} reviews={reviews} />
+            <FilmDescription film={film} reviews={comments} />
           </div>
         </div>
       </section>

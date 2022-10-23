@@ -28,6 +28,8 @@ export enum APIRoute {
   Films = '/films',
   Login = '/login',
   Logout = '/logout',
+  Similar = '/similar',
+  Comments = '/comments'
 }
 
 export const CARDS_PER_STEP = 8;
