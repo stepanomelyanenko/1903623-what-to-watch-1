@@ -23,7 +23,6 @@ function AddReviewScreen(): JSX.Element {
     dispatch(setDataLoadedStatus(false));
   }, [id, dispatch]);
 
-
   if (loadStatus) {
     return(<LoadingScreen />);
   }
@@ -60,6 +59,7 @@ function AddReviewScreen(): JSX.Element {
         </div>
       </div>
       <ReviewForm />
+
     </section>
   );
 }

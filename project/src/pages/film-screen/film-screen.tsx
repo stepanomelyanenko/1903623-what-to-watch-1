@@ -81,7 +81,8 @@ function FilmScreen(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                { authStatus === AuthorizationStatus.Auth &&
+                {
+                  authStatus === AuthorizationStatus.Auth &&
                   <Link
                     to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`}
                     className="btn film-card__button"

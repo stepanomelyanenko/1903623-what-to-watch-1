@@ -9,30 +9,31 @@ function ReviewForm(): JSX.Element {
   const id = Number(useParams().id);
 
   const [formData, setFormData] = useState({
-    rating: 8,
+    rating: NaN,
     reviewText: '',
   });
 
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisabledByText, setIsDisabledByText] = useState(true);
+  const [isDisabledByRate, setIsDisabledByRate] = useState(true);
 
   const dispatch = useAppDispatch();
 
   const textareaChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({...formData, reviewText: evt.target.value});
 
-    if (evt.target.value.length > 50 && evt.target.value.length < 400) {
-      setIsDisabled(false);
+    if (evt.target.value.length >= 50 && evt.target.value.length <= 400) {
+      setIsDisabledByText(false);
     } else {
-      setIsDisabled(true);
+      setIsDisabledByText(true);
     }
   };
 
   const ratingChangeHandle = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, rating: parseInt(evt.target.value, 10)});
     if (evt.target.value) {
-      setIsDisabled(false);
+      setIsDisabledByRate(false);
     } else {
-      setIsDisabled(true);
+      setIsDisabledByRate(true);
     }
   };
 
@@ -78,6 +79,7 @@ function ReviewForm(): JSX.Element {
             placeholder="Review text"
             onChange={textareaChangeHandle}
             value={formData.reviewText}
+            maxLength={400}
           >
 
           </textarea>
@@ -85,7 +87,7 @@ function ReviewForm(): JSX.Element {
             <button
               className="add-review__btn"
               type="submit"
-              disabled={isDisabled}
+              disabled={isDisabledByRate || isDisabledByText}
             >
               Post
             </button>
