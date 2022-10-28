@@ -1,12 +1,14 @@
 import Logo from '../logo/logo';
-import Promo from '../../types/promo';
 import UserBlock from '../user-block/user-block';
+import {useAppSelector} from '../../hooks';
 
-type PromoCardProps = {
-  promo: Promo
-}
+function PromoCard(): JSX.Element {
+  const promo = useAppSelector((state) => state.promo);
 
-function PromoCard({promo}: PromoCardProps): JSX.Element {
+  if (!promo) {
+    return <section className="film-card"></section>;
+  }
+
   return (
     <section className="film-card">
       <div className="film-card__bg">

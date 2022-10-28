@@ -8,7 +8,6 @@ function SignInScreen(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-
   const dispatch = useAppDispatch();
 
   const onSubmit = (authData: AuthData) => {
@@ -25,6 +24,8 @@ function SignInScreen(): JSX.Element {
   //     });
   //   }
   // };
+
+  const checkPassword = (password: string): boolean => (/(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{2,}/.test(password));
 
   return (
     <div className="user-page">
@@ -72,7 +73,9 @@ function SignInScreen(): JSX.Element {
               onClick={(evt) => {
                 evt.preventDefault();
 
-                if (emailRef.current !== null && passwordRef.current !== null) {
+                if (emailRef.current !== null
+                  && passwordRef.current !== null
+                  && checkPassword(passwordRef.current?.value)) {
                   onSubmit({
                     email: emailRef.current.value,
                     password: passwordRef.current.value,

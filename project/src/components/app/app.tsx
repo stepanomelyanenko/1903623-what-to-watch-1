@@ -8,7 +8,6 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
-import Promo from '../../types/promo';
 import Favorite from '../../types/favorite';
 import {useAppSelector} from '../../hooks';
 import {isCheckedAuth} from '../../utils/check-auth';
@@ -17,7 +16,6 @@ import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
 
 type AppProps = {
-  promo: Promo,
   favorite: Favorite
 }
 
@@ -35,7 +33,7 @@ function App(props: AppProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen promo={props.promo} />}
+          element={<MainScreen />}
         />
         <Route
           path={AppRoute.SignIn}

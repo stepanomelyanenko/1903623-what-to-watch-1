@@ -1,16 +1,11 @@
 import Logo from '../../components/logo/logo';
 import PromoCard from '../../components/promo-card/promo-card';
 import FilmList from '../../components/film-list/film-list';
-import Promo from '../../types/promo';
 
-type MainScreenProps = {
-  promo: Promo,
-}
-
-function MainScreen(props: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   return (
     <>
-      <PromoCard promo={props.promo} />
+      <PromoCard />
 
       <div className="page-content">
         <FilmList />

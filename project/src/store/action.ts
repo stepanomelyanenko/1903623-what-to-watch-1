@@ -4,6 +4,7 @@ import {AuthorizationStatus} from '../const';
 import Film from '../types/film';
 import {Comments} from '../types/comments';
 import Similar from '../types/similar';
+import Promo from '../types/promo';
 
 const resetMainScreen = createAction('main/resetState');
 const changeGenre = createAction<{ currentGenre: string }>('main/changeGenre');
@@ -15,6 +16,8 @@ const resetFilmScreen = createAction('film/resetState');
 const changeFilmTab = createAction<{ currentTab: string }>('film/changeFilmTab');
 
 const loadFilms = createAction<Films>('data/loadFilms');
+const loadPromo = createAction<Promo>('data/loadPromo');
+
 const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
@@ -48,4 +51,6 @@ export {
   loadSimilar,
   loadFilm,
   loadComments,
+
+  loadPromo
 };

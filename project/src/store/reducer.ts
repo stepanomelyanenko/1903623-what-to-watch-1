@@ -6,13 +6,14 @@ import {
   increaseCardCount, setAvatar, loadFilms, requireAuthorization,
   resetCardCount,
   resetFilmScreen,
-  resetMainScreen, setDataLoadedStatus, setError, loadFilm, loadComments, loadSimilar
+  resetMainScreen, setDataLoadedStatus, setError, loadFilm, loadComments, loadSimilar, loadPromo
 } from './action';
 import {filterFilmsByGenre} from '../utils/filter-films-by-genre';
 import Films from '../types/films';
 import {Comments} from '../types/comments';
 import Similar from '../types/similar';
 import Film from '../types/film';
+import Promo from '../types/promo';
 
 type InitialState = {
   films: Films;
@@ -28,10 +29,12 @@ type InitialState = {
   comments: Comments,
   similar: Similar,
   film: Film | null
+  promo: Promo | null;
 }
 
 const initialState: InitialState = {
   films: [],
+  promo: null,
 
   currentGenre: DEFAULT_GENRE,
   filteredFilms: [],
@@ -90,6 +93,9 @@ export const reducer = createReducer(initialState, (builder) => {
       state.films = action.payload;
       state.filteredFilms = action.payload;
       state.cardCount = CARDS_PER_STEP;
+    })
+    .addCase(loadPromo, (state, action) => {
+      state.promo = action.payload;
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
