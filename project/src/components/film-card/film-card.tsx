@@ -3,26 +3,28 @@ import {AppRoute} from '../../const';
 import PreviewPlayer from '../preview-player/preview-player';
 import {useAppDispatch} from '../../hooks';
 import {resetMainScreen} from '../../store/action';
+import {useState} from 'react';
 
 type FilmCardProps = {
   id: number,
   title: string,
   image: string,
   previewVideo: string,
-  isPointed: boolean,
-  onChangePointedFilm: (id: number) => void
 }
 
 function FilmCard(props: FilmCardProps): JSX.Element {
-  const {id, title, image, previewVideo, isPointed, onChangePointedFilm} = props;
+  const {id, title, image, previewVideo} = props;
+
+  const [isPointed, setIsPointed] = useState(false);
 
   const dispatch = useAppDispatch();
+
 
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={() => onChangePointedFilm(id)}
-      onMouseLeave={() => onChangePointedFilm(NaN)}
+      onMouseEnter={() => setIsPointed(true)}
+      onMouseLeave={() => setIsPointed(false)}
     >
       <div className="small-film-card__image">
         {
