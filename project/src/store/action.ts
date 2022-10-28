@@ -32,7 +32,9 @@ const loadFilm = createAction<Film>('data/loadFilmById');
 const loadComments = createAction<Comments>('data/loadCommentsById');
 const loadSimilar = createAction<Similar>('data/loadSimilarById');
 
-//const postComment = createAction<UserComment>('data/postCommentById');
+const setFilmFoundStatus = createAction<boolean>('film/setFilmFoundStatus');
+const setFilmLoadedStatus = createAction<boolean>('film/setFilmLoadedStatus');
+
 
 export {
   resetMainScreen,
@@ -52,5 +54,8 @@ export {
   loadFilm,
   loadComments,
 
-  loadPromo
+  loadPromo,
+
+  setFilmFoundStatus,
+  setFilmLoadedStatus
 };

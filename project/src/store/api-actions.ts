@@ -12,7 +12,7 @@ import {
   setError,
   loadComments,
   loadFilm,
-  loadSimilar, loadPromo
+  loadSimilar, loadPromo, setFilmLoadedStatus, setFilmFoundStatus
 } from './action';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
@@ -42,9 +42,7 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Films>(APIRoute.Films);
-    // dispatch(setDataLoadedStatus(true));
     dispatch(loadFilms(data));
-    // dispatch(setDataLoadedStatus(false));
   },
 );
 
@@ -113,8 +111,16 @@ export const fetchFilmByID = createAsyncThunk<void, string, {
 }>(
   'data/fetchFilmById',
   async (filmId: string, {dispatch, extra: api}) => {
-    const {data} = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
-    dispatch(loadFilm(data));
+    try {
+      const {data} = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
+      dispatch(loadFilm(data));
+      dispatch(setFilmLoadedStatus(true));
+      dispatch(setFilmFoundStatus(true));
+    } catch {
+      dispatch(setFilmLoadedStatus(true));
+      dispatch(setFilmFoundStatus(false));
+    }
+
   },
 );
 

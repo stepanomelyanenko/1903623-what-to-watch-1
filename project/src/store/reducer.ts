@@ -3,10 +3,21 @@ import {AuthorizationStatus, CARDS_PER_STEP, DEFAULT_GENRE, FilmPageTabs} from '
 import {
   changeFilmTab,
   changeGenre,
-  increaseCardCount, setAvatar, loadFilms, requireAuthorization,
+  increaseCardCount,
+  setAvatar,
+  loadFilms,
+  requireAuthorization,
   resetCardCount,
   resetFilmScreen,
-  resetMainScreen, setDataLoadedStatus, setError, loadFilm, loadComments, loadSimilar, loadPromo
+  resetMainScreen,
+  setDataLoadedStatus,
+  setError,
+  loadFilm,
+  loadComments,
+  loadSimilar,
+  loadPromo,
+  setFilmLoadedStatus,
+  setFilmFoundStatus
 } from './action';
 import {filterFilmsByGenre} from '../utils/filter-films-by-genre';
 import Films from '../types/films';
@@ -30,6 +41,10 @@ type InitialState = {
   similar: Similar,
   film: Film | null
   promo: Promo | null;
+
+
+  isFilmFoundStatus: boolean | null,
+  isFilmLoadedStatus: boolean | null
 }
 
 const initialState: InitialState = {
@@ -50,7 +65,10 @@ const initialState: InitialState = {
 
   comments: [],
   similar: [],
-  film: null
+  film: null,
+
+  isFilmFoundStatus: null,
+  isFilmLoadedStatus: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -121,5 +139,12 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadSimilar, (state, action) => {
       state.similar = action.payload;
+    })
+
+    .addCase(setFilmLoadedStatus, (state, action) => {
+      state.isFilmLoadedStatus = action.payload;
+    })
+    .addCase(setFilmFoundStatus, (state, action) => {
+      state.isFilmFoundStatus = action.payload;
     });
 });
