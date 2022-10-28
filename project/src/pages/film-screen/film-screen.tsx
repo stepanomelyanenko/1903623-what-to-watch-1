@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 
 import {fetchCommentsByID, fetchFilmByID, fetchSimilarByID} from '../../store/api-actions';
-import {setFilmLoadedStatus} from '../../store/action';
+import {changeFilmTab, setFilmLoadedStatus} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 
 import Logo from '../../components/logo/logo';
@@ -12,7 +12,7 @@ import SimilarList from '../../components/similar-list/similar-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, FilmPageTabs} from '../../const';
 
 function FilmScreen(): JSX.Element {
   const id = Number(useParams().id);
@@ -30,6 +30,7 @@ function FilmScreen(): JSX.Element {
 
   useEffect(() => {
     dispatch(setFilmLoadedStatus(false));
+    dispatch(changeFilmTab({currentTab: FilmPageTabs.Overview}));
     dispatch(fetchFilmByID(id.toString()));
     dispatch(fetchCommentsByID(id.toString()));
     dispatch(fetchSimilarByID(id.toString()));
