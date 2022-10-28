@@ -1,10 +1,14 @@
 import Logo from '../../components/logo/logo';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useRef, useState} from 'react';
 import {loginAction} from '../../store/api-actions';
 import {AuthData} from '../../types/auth-data';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {Navigate} from 'react-router-dom';
 
 function SignInScreen(): JSX.Element {
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
+
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -19,18 +23,21 @@ function SignInScreen(): JSX.Element {
     setIsInvalidEmail(!result);
 
     return result;
-  }
+  };
 
   const checkPassword = (password: string): boolean => {
     const result = /(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{2,}/.test(password);
     setIsInvalidPassword(!result);
 
     return result;
-  }
+  };
 
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
 
+  if (authStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
