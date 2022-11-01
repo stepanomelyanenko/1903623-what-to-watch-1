@@ -1,3 +1,9 @@
+import Films from './types/films';
+import Promo from './types/promo';
+import {Comments} from './types/comments';
+import Similar from './types/similar';
+import Film from './types/film';
+
 export enum AppRoute {
   Root = '/',
   SignIn = '/login',
@@ -34,3 +40,29 @@ export enum APIRoute {
 }
 
 export const CARDS_PER_STEP = 8;
+
+export enum NameSpace {
+  User = 'USER',
+  MainScreen = 'MAIN',
+  FilmScreen = 'FILM'
+}
+
+
+export type MainData = {
+  films: Films,
+  promo: Promo | null,
+  isDataLoaded: boolean,
+  currentGenre: string,
+  filteredFilms: Films,
+  cardCount: number,
+}
+
+
+export type FilmData = {
+  film: Film | null,
+  similar: Similar,
+  comments: Comments,
+  filmPageTab: string,
+  isFilmFoundStatus: boolean | null,
+  isFilmLoadingStatus: boolean | null
+}

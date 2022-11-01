@@ -1,16 +1,15 @@
 import {createAction} from '@reduxjs/toolkit';
 import Films from '../types/films';
-import {AuthorizationStatus} from '../const';
 import Film from '../types/film';
 import {Comments} from '../types/comments';
 import Similar from '../types/similar';
 import Promo from '../types/promo';
 
-const resetMainScreen = createAction('main/resetState');
-const changeGenre = createAction<{ currentGenre: string }>('main/changeGenre');
+//const resetMainScreen = createAction('main/resetState');
+//const changeGenre = createAction<{ currentGenre: string }>('main/changeGenre');
 
-const increaseCardCount = createAction('main/increaseCardCount');
-const resetCardCount = createAction('main/resetCardCount');
+//const increaseCardCount = createAction('main/increaseCardCount');
+//const resetCardCount = createAction('main/resetCardCount');
 
 const resetFilmScreen = createAction('film/resetState');
 const changeFilmTab = createAction<{ currentTab: string }>('film/changeFilmTab');
@@ -18,9 +17,7 @@ const changeFilmTab = createAction<{ currentTab: string }>('film/changeFilmTab')
 const loadFilms = createAction<Films>('data/loadFilms');
 const loadPromo = createAction<Promo>('data/loadPromo');
 
-const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
-
-const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+//const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 const setAvatar = createAction<string | null>('user/avatar');
 
@@ -37,15 +34,14 @@ const setFilmLoadedStatus = createAction<boolean>('film/setFilmLoadedStatus');
 
 
 export {
-  resetMainScreen,
-  changeGenre,
-  increaseCardCount,
-  resetCardCount,
+  // resetMainScreen,
+  // changeGenre,
+  // increaseCardCount,
+  //resetCardCount,
   resetFilmScreen,
   changeFilmTab,
   loadFilms,
-  setDataLoadedStatus,
-  requireAuthorization,
+  // setDataLoadedStatus,
   setError,
   redirectToRoute,
   setAvatar,
