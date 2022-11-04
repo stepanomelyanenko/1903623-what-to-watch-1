@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {CARDS_PER_STEP, DEFAULT_GENRE, MainData, NameSpace} from '../../const';
-import {fetchFilmsAction, fetchPromoAction} from '../api-actions';
+import {CARDS_PER_STEP, DEFAULT_GENRE, NameSpace} from '../../const';
+import {fetchFavoriteFilmsAction, fetchFilmsAction, fetchPromoAction} from '../api-actions';
 import {filterFilmsByGenre} from '../../utils/filter-films-by-genre';
+import {MainData} from '../../types/main-data';
 
 const initialState: MainData = {
   films: [],
@@ -9,7 +10,8 @@ const initialState: MainData = {
   isDataLoaded: false,
   currentGenre: DEFAULT_GENRE,
   filteredFilms: [],
-  cardCount: 0
+  cardCount: 0,
+  favoriteFilms: []
 };
 
 export const mainData = createSlice({
@@ -49,15 +51,22 @@ export const mainData = createSlice({
         state.isDataLoaded = true;
       })
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
-        state.films = action.payload;
-        // state.isDataLoaded = false;
+        const films = action.payload;
+
+        state.films = films;
+        state.filteredFilms = films;
+        state.cardCount = films.length < CARDS_PER_STEP ? films.length : 8;
+        state.isDataLoaded = false;
       })
-      //fix there
-      // .addCase(fetchPromoAction.pending, (state) => {
-      //   state.isDataLoaded = true;
-      // })
       .addCase(fetchPromoAction.fulfilled, (state, action) => {
         state.promo = action.payload;
+      })
+
+      .addCase(fetchFavoriteFilmsAction.pending, (state) => {
+        state.isDataLoaded = true;
+      })
+      .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
+        state.favoriteFilms = action.payload;
         state.isDataLoaded = false;
       })
   }

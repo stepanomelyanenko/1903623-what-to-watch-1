@@ -4,25 +4,16 @@ import FilmTabs from '../film-tabs/film-tabs';
 import Overview from '../overview/overview';
 import Details from '../details/details';
 import ReviewList from '../review-list/review-list';
-
-import Film from '../../types/film';
-import Reviews from '../../types/reviews';
 import {FilmPageTabs} from '../../const';
+import {getComments, getFilm, getFilmPageTab} from '../../store/film-data/selectors';
 
-type FilmDescProps = {
-  film: Film | null,
-  reviews: Reviews
-}
-
-function FilmDescription ({film, reviews}: FilmDescProps): JSX.Element {
-  const currentTab = useAppSelector((state) => state.filmPageTab);
+function FilmDescription (): JSX.Element {
+  const currentTab = useAppSelector(getFilmPageTab);
+  const film = useAppSelector(getFilm);
+  const comments = useAppSelector(getComments);
 
   if (!film) {
-    return (
-      <div className="film-card__desc">
-        <FilmTabs currentTab={currentTab} />
-      </div>
-    );
+    return <div className="film-card__desc">NO FILMS</div>;
   }
 
   return (
@@ -47,7 +38,7 @@ function FilmDescription ({film, reviews}: FilmDescProps): JSX.Element {
           released={film.released}
         />}
 
-      {currentTab === FilmPageTabs.Reviews && <ReviewList reviews={reviews} />}
+      {currentTab === FilmPageTabs.Reviews && <ReviewList reviews={comments} />}
     </div>
   );
 }

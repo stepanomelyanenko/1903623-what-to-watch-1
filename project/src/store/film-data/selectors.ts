@@ -8,5 +8,5 @@ export const getFilm = (state: State): Film | null => state[NameSpace.FilmScreen
 export const getSimilar = (state: State): Similar => state[NameSpace.FilmScreen].similar;
 export const getComments = (state: State): Comments => state[NameSpace.FilmScreen].comments;
 export const getFilmPageTab = (state: State): string => state[NameSpace.FilmScreen].filmPageTab;
-export const getIsFilmLoadingStatus = (state: State): boolean  | null => state[NameSpace.FilmScreen].isFilmLoadingStatus;
+export const getIsFilmLoadingStatus = (state: State): boolean | null => state[NameSpace.FilmScreen].isFilmLoadingStatus;
 export const getIsFilmFoundStatus = (state: State): boolean | null => state[NameSpace.FilmScreen].isFilmFoundStatus;

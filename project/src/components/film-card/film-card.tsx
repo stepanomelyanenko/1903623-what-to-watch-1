@@ -2,8 +2,9 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import PreviewPlayer from '../preview-player/preview-player';
 import {useAppDispatch} from '../../hooks';
-import {resetMainScreen} from '../../store/action';
+// import {resetMainScreen} from '../../store/action';
 import {useState} from 'react';
+import {resetMainScreen} from '../../store/main-data/main-data';
 
 type FilmCardProps = {
   id: number,

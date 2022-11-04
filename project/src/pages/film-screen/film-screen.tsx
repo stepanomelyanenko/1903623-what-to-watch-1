@@ -2,7 +2,6 @@ import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 
 import {fetchCommentsByID, fetchFilmByID, fetchSimilarByID} from '../../store/api-actions';
-import {changeFilmTab, setFilmLoadedStatus} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 
 import Logo from '../../components/logo/logo';
@@ -13,30 +12,36 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 import {AppRoute, AuthorizationStatus, FilmPageTabs} from '../../const';
+import {
+  getFilm,
+  getIsFilmFoundStatus,
+  getIsFilmLoadingStatus,
+  getSimilar
+} from '../../store/film-data/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {changeFilmTab} from '../../store/film-data/film-data';
 
 function FilmScreen(): JSX.Element {
   const id = Number(useParams().id);
 
-  const film = useAppSelector((state) => state.film);
-  const comments = useAppSelector((state) => state.comments);
-  const similar = useAppSelector((state) => state.similar);
+  const film = useAppSelector(getFilm);
+  const similar = useAppSelector(getSimilar);
 
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus = useAppSelector(getAuthorizationStatus);
 
-  const isFilmFoundStatus = useAppSelector((state) => state.isFilmFoundStatus);
-  const isFilmLoadedStatus = useAppSelector((state) => state.isFilmLoadedStatus);
+  const isFilmFoundStatus = useAppSelector(getIsFilmFoundStatus);
+  const isFilmLoadingStatus = useAppSelector(getIsFilmLoadingStatus);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setFilmLoadedStatus(false));
-    dispatch(changeFilmTab({currentTab: FilmPageTabs.Overview}));
+    dispatch(changeFilmTab(FilmPageTabs.Overview));
     dispatch(fetchFilmByID(id.toString()));
     dispatch(fetchCommentsByID(id.toString()));
     dispatch(fetchSimilarByID(id.toString()));
   }, [id, dispatch]);
 
-  if (!isFilmLoadedStatus) {
+  if (isFilmLoadingStatus) {
     return <LoadingScreen />;
   }
 
@@ -101,8 +106,7 @@ function FilmScreen(): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={film?.posterImage} alt={film?.name} width="218" height="327" />
             </div>
-
-            <FilmDescription film={film} reviews={comments} />
+            <FilmDescription />
           </div>
         </div>
       </section>

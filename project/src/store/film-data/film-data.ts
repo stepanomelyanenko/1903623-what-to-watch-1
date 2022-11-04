@@ -1,12 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {FilmData, FilmPageTabs, NameSpace} from '../../const';
+import {FilmPageTabs, NameSpace} from '../../const';
 import {fetchCommentsByID, fetchFilmByID, fetchSimilarByID} from '../api-actions';
+import {FilmData} from '../../types/film-data';
 
 const initialState: FilmData = {
   film: null,
   similar: [],
   comments: [],
-  filmPageTab: FilmPageTabs.Overview as string,
+  filmPageTab: FilmPageTabs.Overview,
   isFilmLoadingStatus: null,
   isFilmFoundStatus: null
 };
@@ -34,7 +35,7 @@ export const filmData = createSlice({
         state.isFilmLoadingStatus = false;
       })
       .addCase(fetchFilmByID.rejected, (state, action) => {
-        state.isFilmFoundStatus = false
+        state.isFilmFoundStatus = false;
         state.isFilmLoadingStatus = false;
       })
       .addCase(fetchSimilarByID.fulfilled, (state, action) => {
@@ -42,7 +43,7 @@ export const filmData = createSlice({
       })
       .addCase(fetchCommentsByID.fulfilled, (state, action) => {
         state.comments = action.payload;
-      })
+      });
   }
 });
 

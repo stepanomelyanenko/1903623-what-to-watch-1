@@ -1,7 +1,8 @@
 import {AppRoute} from '../../const';
-import {resetMainScreen} from '../../store/action';
+// import {resetMainScreen} from '../../store/action';
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
+import {resetMainScreen} from '../../store/main-data/main-data';
 
 type FilmCardProps = {
   id: number,

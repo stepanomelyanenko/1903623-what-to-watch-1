@@ -1,9 +1,10 @@
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import {useAppSelector} from '../../hooks';
+import {getPromo} from '../../store/main-data/selectors';
 
 function PromoCard(): JSX.Element {
-  const promo = useAppSelector((state) => state.promo);
+  const promo = useAppSelector(getPromo);
 
   if (!promo) {
     return <section className="film-card"></section>;
