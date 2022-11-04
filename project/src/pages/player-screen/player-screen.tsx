@@ -1,34 +1,83 @@
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {getFilm, getIsFilmFoundStatus, getIsFilmLoadingStatus} from '../../store/film-data/selectors';
+import {useEffect, useState} from 'react';
+import LoadingScreen from '../loading-screen/loading-screen';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import {fetchFilmByID} from '../../store/api-actions';
+import {useNavigate, useParams} from 'react-router-dom';
+import PlayerControlPause from '../../components/player-control-pause/player-control-pause';
+import PlayerControlPlay from '../../components/player-control-play/player-control-play';
+import PlayerControlFullScreen from '../../components/player-control-full-screen/player-control-full-screen';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import VideoPlayer from '../../components/video-player/video-player';
+
 function PlayerScreen(): JSX.Element {
+  const id = Number(useParams().id);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [isPlay, setIsPlay] = useState(true);
+
+  dayjs.extend(duration);
+
+  const film = useAppSelector(getFilm);
+
+  const isFilmFoundStatus = useAppSelector(getIsFilmFoundStatus);
+  const isFilmLoadingStatus = useAppSelector(getIsFilmLoadingStatus);
+
+  const handleClickExitButton = () => {
+    navigate(-1);
+  };
+
+  const handleClickPlayButton = () => {
+    setIsPlay(true);
+  };
+
+  const handleClickPauseButton = () => {
+    setIsPlay(false);
+  };
+
+  useEffect(() => {
+    dispatch(fetchFilmByID(id.toString()));
+  }, [id, dispatch]);
+
+  if (isFilmLoadingStatus) {
+    return <LoadingScreen />;
+  }
+
+  if (!isFilmFoundStatus) {
+    return <NotFoundScreen />;
+  }
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <VideoPlayer isMute={false} isPlay={isPlay} poster={film?.previewImage || ''} src={film?.videoLink || ''} />
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit" onClick={handleClickExitButton}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
+            <progress className="player__progress" value="0" max="100"></progress>
+            <div className="player__toggler" style={{left: '0%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">
+            {
+              dayjs
+                .duration(film?.runTime || 0, 'minutes')
+                .format(`${film?.runTime || 0 > 60 ? 'H[:]m[:]ss' : 'm'}`)
+            }
+          </div>
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
-            </svg>
-            <span>Play</span>
-          </button>
+          {
+            isPlay
+              ? <PlayerControlPause onClick={handleClickPauseButton}/>
+              : <PlayerControlPlay onClick={handleClickPlayButton}/>
+          }
           <div className="player__name">Transpotting</div>
-
-          <button type="button" className="player__full-screen">
-            <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref="#full-screen"></use>
-            </svg>
-            <span>Full screen</span>
-          </button>
+          <PlayerControlFullScreen />
         </div>
       </div>
     </div>

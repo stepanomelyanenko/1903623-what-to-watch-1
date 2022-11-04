@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 
 import {
   changeFilmStatusToView,
@@ -23,7 +23,7 @@ import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {changeFilmTab} from '../../store/film-data/film-data';
 import {getFavoriteCount} from '../../store/main-data/selectors';
 import {FilmStatus} from '../../types/film-status';
-import {setFavoriteCount, setIsDataLoaded} from '../../store/main-data/main-data';
+import {setFavoriteCount} from '../../store/main-data/main-data';
 
 function FilmScreen(): JSX.Element {
   const id = Number(useParams().id);
@@ -39,6 +39,7 @@ function FilmScreen(): JSX.Element {
   const favoriteCount = useAppSelector(getFavoriteCount);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onAddFavoriteClick = () => {
     const filmStatus: FilmStatus = {
@@ -56,7 +57,6 @@ function FilmScreen(): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(setIsDataLoaded(true));
     dispatch(changeFilmTab(FilmPageTabs.Overview));
     dispatch(fetchFilmByID(id.toString()));
     dispatch(fetchCommentsByID(id.toString()));
@@ -65,8 +65,6 @@ function FilmScreen(): JSX.Element {
     if (authStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoriteFilmsAction());
     }
-
-    dispatch(setIsDataLoaded(false));
 
   }, [id, authStatus, dispatch]);
 
@@ -103,7 +101,13 @@ function FilmScreen(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button
+                  className="btn btn--play film-card__button"
+                  type="button"
+                  onClick={ () => {
+                    navigate(`${AppRoute.Player}/${id}`);
+                  }}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
