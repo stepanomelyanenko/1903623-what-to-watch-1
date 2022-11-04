@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {CARDS_PER_STEP, DEFAULT_GENRE, NameSpace} from '../../const';
-import {fetchFavoriteFilmsAction, fetchFilmsAction, fetchPromoAction} from '../api-actions';
+import {changePromoStatusToView, fetchFavoriteFilmsAction, fetchFilmsAction, fetchPromoAction} from '../api-actions';
 import {filterFilmsByGenre} from '../../utils/filter-films-by-genre';
 import {MainData} from '../../types/main-data';
 
@@ -11,7 +11,8 @@ const initialState: MainData = {
   currentGenre: DEFAULT_GENRE,
   filteredFilms: [],
   cardCount: 0,
-  favoriteFilms: []
+  favoriteFilms: [],
+  favoriteCount: 0
 };
 
 export const mainData = createSlice({
@@ -43,6 +44,14 @@ export const mainData = createSlice({
       state.cardCount = state.filteredFilms.length < CARDS_PER_STEP ?
         state.filteredFilms.length :
         8;
+    },
+
+    setIsDataLoaded: (state, action) => {
+      state.isDataLoaded = action.payload;
+    },
+
+    setFavoriteCount: (state, action) => {
+      state.favoriteCount = action.payload;
     }
   },
   extraReducers(builder) {
@@ -67,8 +76,12 @@ export const mainData = createSlice({
       })
       .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
         state.favoriteFilms = action.payload;
+        state.favoriteCount = action.payload.length;
         state.isDataLoaded = false;
       })
+      .addCase(changePromoStatusToView.fulfilled, (state, action) => {
+        state.promo = action.payload;
+      });
   }
 });
 
@@ -76,5 +89,7 @@ export const {
   resetMainScreen,
   changeGenre,
   increaseCardCount,
-  resetCardCount
+  resetCardCount,
+  setIsDataLoaded,
+  setFavoriteCount
 } = mainData.actions;

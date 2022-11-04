@@ -9,5 +9,6 @@ export type MainData = {
   currentGenre: string,
   filteredFilms: Films,
   cardCount: number,
-  favoriteFilms: Favorite
+  favoriteFilms: Favorite,
+  favoriteCount: number
 }

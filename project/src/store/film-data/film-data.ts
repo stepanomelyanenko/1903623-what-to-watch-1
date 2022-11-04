@@ -1,6 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {FilmPageTabs, NameSpace} from '../../const';
-import {fetchCommentsByID, fetchFilmByID, fetchSimilarByID} from '../api-actions';
+import {
+  changeFilmStatusToView,
+  fetchCommentsByID,
+  fetchFilmByID,
+  fetchSimilarByID
+} from '../api-actions';
 import {FilmData} from '../../types/film-data';
 
 const initialState: FilmData = {
@@ -43,6 +48,9 @@ export const filmData = createSlice({
       })
       .addCase(fetchCommentsByID.fulfilled, (state, action) => {
         state.comments = action.payload;
+      })
+      .addCase(changeFilmStatusToView.fulfilled, (state, action) => {
+        state.film = action.payload;
       });
   }
 });

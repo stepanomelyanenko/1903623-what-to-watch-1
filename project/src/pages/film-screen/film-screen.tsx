@@ -1,7 +1,13 @@
 import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 
-import {fetchCommentsByID, fetchFilmByID, fetchSimilarByID} from '../../store/api-actions';
+import {
+  changeFilmStatusToView,
+  fetchCommentsByID,
+  fetchFavoriteFilmsAction,
+  fetchFilmByID,
+  fetchSimilarByID
+} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 
 import Logo from '../../components/logo/logo';
@@ -12,14 +18,12 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 import {AppRoute, AuthorizationStatus, FilmPageTabs} from '../../const';
-import {
-  getFilm,
-  getIsFilmFoundStatus,
-  getIsFilmLoadingStatus,
-  getSimilar
-} from '../../store/film-data/selectors';
+import {getFilm, getIsFilmFoundStatus, getIsFilmLoadingStatus, getSimilar} from '../../store/film-data/selectors';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {changeFilmTab} from '../../store/film-data/film-data';
+import {getFavoriteCount} from '../../store/main-data/selectors';
+import {FilmStatus} from '../../types/film-status';
+import {setFavoriteCount, setIsDataLoaded} from '../../store/main-data/main-data';
 
 function FilmScreen(): JSX.Element {
   const id = Number(useParams().id);
@@ -32,14 +36,39 @@ function FilmScreen(): JSX.Element {
   const isFilmFoundStatus = useAppSelector(getIsFilmFoundStatus);
   const isFilmLoadingStatus = useAppSelector(getIsFilmLoadingStatus);
 
+  const favoriteCount = useAppSelector(getFavoriteCount);
+
   const dispatch = useAppDispatch();
 
+  const onAddFavoriteClick = () => {
+    const filmStatus: FilmStatus = {
+      filmId: film?.id || NaN,
+      status: film?.isFavorite ? 0 : 1
+    };
+
+    dispatch(changeFilmStatusToView(filmStatus));
+
+    if (film?.isFavorite) {
+      dispatch(setFavoriteCount(favoriteCount - 1));
+    } else {
+      dispatch(setFavoriteCount(favoriteCount + 1));
+    }
+  };
+
   useEffect(() => {
+    dispatch(setIsDataLoaded(true));
     dispatch(changeFilmTab(FilmPageTabs.Overview));
     dispatch(fetchFilmByID(id.toString()));
     dispatch(fetchCommentsByID(id.toString()));
     dispatch(fetchSimilarByID(id.toString()));
-  }, [id, dispatch]);
+
+    if (authStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteFilmsAction());
+    }
+
+    dispatch(setIsDataLoaded(false));
+
+  }, [id, authStatus, dispatch]);
 
   if (isFilmLoadingStatus) {
     return <LoadingScreen />;
@@ -80,13 +109,23 @@ function FilmScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                {
+                  authStatus === AuthorizationStatus.Auth &&
+                  <button
+                    className="btn btn--list film-card__button"
+                    type="button"
+                    onClick={onAddFavoriteClick}
+                  >
+                    {
+                      film?.isFavorite ? <span>✓</span> :
+                        <svg viewBox="0 0 19 20" width="19" height="20">
+                          <use xlinkHref="#add"></use>
+                        </svg>
+                    }
+                    <span>My list</span>
+                    <span className="film-card__count">{favoriteCount}</span>
+                  </button>
+                }
                 {
                   authStatus === AuthorizationStatus.Auth &&
                   <Link
