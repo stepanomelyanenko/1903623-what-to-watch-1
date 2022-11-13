@@ -1,4 +1,5 @@
 import convertTime from '../../utils/convert-time';
+import {Fragment} from 'react';
 
 type DetailsProps = {
   director: string,
@@ -20,7 +21,7 @@ function Details(props: DetailsProps): JSX.Element {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {starring.map((star) => <>{star}<br /></>)}
+            {starring.map((star) => <Fragment key={star}>{star}<br /></Fragment>)}
           </span>
         </p>
       </div>
