@@ -4,7 +4,6 @@ import {useAppDispatch} from '../../hooks';
 import {UserComment} from '../../types/user-comment';
 import {postComment} from '../../store/api-actions';
 
-
 function ReviewForm(): JSX.Element {
   const id = Number(useParams().id);
 

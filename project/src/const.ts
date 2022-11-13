@@ -69,3 +69,8 @@ export const playerControl = {
     className: 'player__full-screen',
   },
 };
+
+export enum favoriteClickType {
+  Film = 'FILM',
+  Promo = 'PROMO'
+}

@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import DevFilmCard from '../../components/dev-film-card/dev-film-card';
+import EasyFilmCard from '../../components/easy-film-card/easy-film-card';
 import UserBlock from '../../components/user-block/user-block';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getFavoriteFilms, getLoadedDataStatus} from '../../store/main-data/selectors';
@@ -42,7 +42,7 @@ function MyListScreen(): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {favorite.map((film) => <DevFilmCard key={film.id} id={film.id} title={film.name} image={film.previewImage}/>)}
+          {favorite.map((film) => <EasyFilmCard key={film.id} id={film.id} title={film.name} image={film.previewImage}/>)}
         </div>
       </section>
 

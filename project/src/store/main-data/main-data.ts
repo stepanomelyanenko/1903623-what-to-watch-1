@@ -3,6 +3,7 @@ import {CARDS_PER_STEP, DEFAULT_GENRE, NameSpace} from '../../const';
 import {changePromoStatusToView, fetchFavoriteFilmsAction, fetchFilmsAction, fetchPromoAction} from '../api-actions';
 import {filterFilmsByGenre} from '../../utils/filter-films-by-genre';
 import {MainData} from '../../types/main-data';
+//import {processErrorHandle} from '../../services/process-error-handle';
 
 const initialState: MainData = {
   films: [],
@@ -81,6 +82,10 @@ export const mainData = createSlice({
       })
       .addCase(changePromoStatusToView.fulfilled, (state, action) => {
         state.promo = action.payload;
+
+      })
+      .addCase(changePromoStatusToView.rejected, (state, action) => {
+        //processErrorHandle('ERROR');
       });
   }
 });
@@ -89,7 +94,5 @@ export const {
   resetMainScreen,
   changeGenre,
   increaseCardCount,
-  resetCardCount,
-  setIsDataLoaded,
   setFavoriteCount
 } = mainData.actions;

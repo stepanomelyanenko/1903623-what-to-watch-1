@@ -7,7 +7,6 @@ import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {AuthorizationStatus} from '../../const';
 import {fetchFavoriteFilmsAction} from '../../store/api-actions';
 
-
 function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthorizationStatus);

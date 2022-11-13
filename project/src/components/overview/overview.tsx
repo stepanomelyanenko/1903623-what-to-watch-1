@@ -6,7 +6,6 @@ type OverviewProps = {
   description: string,
   director: string,
   starring: string[]
-
 }
 
 function Overview(props: OverviewProps): JSX.Element {

@@ -9,7 +9,6 @@ import ErrorMessage from './components/error-message/error-message';
 
 import {checkAuthAction, fetchFilmsAction, fetchPromoAction} from './store/api-actions';
 
-
 store.dispatch(fetchFilmsAction());
 store.dispatch(fetchPromoAction());
 store.dispatch(checkAuthAction());

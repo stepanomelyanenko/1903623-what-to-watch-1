@@ -7,6 +7,7 @@ import {
   fetchSimilarByID
 } from '../api-actions';
 import {FilmData} from '../../types/film-data';
+//import {processErrorHandle} from '../../services/process-error-handle';
 
 const initialState: FilmData = {
   film: null,
@@ -51,11 +52,13 @@ export const filmData = createSlice({
       })
       .addCase(changeFilmStatusToView.fulfilled, (state, action) => {
         state.film = action.payload;
+      })
+      .addCase(changeFilmStatusToView.rejected, (state, action) => {
+        //processErrorHandle('ERROR');
       });
   }
 });
 
 export const {
   changeFilmTab,
-  resetFilmTab
 } = filmData.actions;

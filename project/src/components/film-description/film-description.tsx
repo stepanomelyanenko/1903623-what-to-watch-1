@@ -13,7 +13,7 @@ function FilmDescription (): JSX.Element {
   const comments = useAppSelector(getComments);
 
   if (!film) {
-    return <div className="film-card__desc">NO FILMS</div>;
+    return <div className="film-card__desc"></div>;
   }
 
   return (

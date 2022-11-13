@@ -12,11 +12,7 @@ export default function VideoPlayer({poster, src, isMute, isPlay}: VideoPlayerPr
 
   useEffect(() => {
     if (videoRef.current !== null) {
-      if (isMute) {
-        videoRef.current.muted = true;
-      } else {
-        videoRef.current.muted = false;
-      }
+      videoRef.current.muted = isMute;
     }
   }, [isMute]);
 
@@ -29,9 +25,8 @@ export default function VideoPlayer({poster, src, isMute, isPlay}: VideoPlayerPr
       }
     }
   }, [isPlay]);
+
   return(
-
     <video src={src} className="player__video" poster={poster} ref={videoRef}></video>
-
   );
 }

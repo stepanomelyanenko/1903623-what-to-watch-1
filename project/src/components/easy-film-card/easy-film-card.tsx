@@ -1,5 +1,5 @@
 import {AppRoute} from '../../const';
-// import {resetMainScreen} from '../../store/action';
+
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {resetMainScreen} from '../../store/main-data/main-data';
@@ -10,8 +10,12 @@ type FilmCardProps = {
   image: string
 }
 
-function DevFilmCard({id, title, image}: FilmCardProps): JSX.Element {
+function EasyFilmCard({id, title, image}: FilmCardProps): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const cardClickHandle = () => {
+    dispatch(resetMainScreen());
+  };
 
   return (
     <article className="small-film-card catalog__films-card">
@@ -22,9 +26,7 @@ function DevFilmCard({id, title, image}: FilmCardProps): JSX.Element {
         <Link
           className="small-film-card__link"
           to={`${AppRoute.Film}/${id}`}
-          onClick={() => {
-            dispatch(resetMainScreen());
-          }}
+          onClick={cardClickHandle}
         >
           {title}
         </Link>
@@ -33,4 +35,4 @@ function DevFilmCard({id, title, image}: FilmCardProps): JSX.Element {
   );
 }
 
-export default DevFilmCard;
+export default EasyFilmCard;
