@@ -44,32 +44,6 @@ export enum NameSpace {
   App ='APP'
 }
 
-export const playerControl = {
-  Play: {
-    width: 19,
-    height: 19,
-    xlinkHref: '#play-s',
-    desc: 'Play',
-    className: 'player__play',
-  },
-
-  Pause: {
-    width: 14,
-    height: 21,
-    xlinkHref: '#pause',
-    desc: 'Pause',
-    className: 'player__play',
-  },
-
-  FullScreen: {
-    width: 27,
-    height: 27,
-    xlinkHref: '#full-screen',
-    desc: 'Full screen',
-    className: 'player__full-screen',
-  },
-};
-
 export enum favoriteClickType {
   Film = 'FILM',
   Promo = 'PROMO'

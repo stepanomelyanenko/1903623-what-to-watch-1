@@ -52,9 +52,6 @@ export const filmData = createSlice({
       })
       .addCase(changeFilmStatusToView.fulfilled, (state, action) => {
         state.film = action.payload;
-      })
-      .addCase(changeFilmStatusToView.rejected, (state, action) => {
-        processErrorHandle('ERROR');
       });
   }
 });
