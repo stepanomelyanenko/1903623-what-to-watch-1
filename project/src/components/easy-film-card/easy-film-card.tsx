@@ -1,5 +1,4 @@
 import {AppRoute} from '../../const';
-
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {resetMainScreen} from '../../store/main-data/main-data';

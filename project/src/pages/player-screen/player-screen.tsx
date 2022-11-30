@@ -6,6 +6,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import {fetchFilmByID} from '../../store/api-actions';
 import {useNavigate, useParams} from 'react-router-dom';
 import {resetMainScreen} from '../../store/main-data/main-data';
+import {FullScreenButton} from '../../components/full-screen-button/full-screen-button';
 
 function PlayerScreen(): JSX.Element {
   const id = Number(useParams().id);
@@ -43,10 +44,6 @@ function PlayerScreen(): JSX.Element {
   const handleClickPlay = () => {
     player.current.play();
     setPlaying(true);
-  };
-
-  const handleClickFullScreen = () => {
-    player.current.requestFullscreen();
   };
 
   useEffect(() => {
@@ -108,12 +105,8 @@ function PlayerScreen(): JSX.Element {
 
           <div className="player__name">{film?.name}</div>
 
-          <button type="button" className="player__full-screen" onClick={handleClickFullScreen}>
-            <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref="#full-screen"></use>
-            </svg>
-            <span>Full screen</span>
-          </button>
+          <FullScreenButton />
+
         </div>
       </div>
     </div>
